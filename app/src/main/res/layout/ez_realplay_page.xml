@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/realplay_page_ly"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <com.videogo.widget.TitleBar
+        android:id="@+id/title_bar_portrait"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+	<RelativeLayout
+		android:id="@+id/realplay_play_rl"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:background="@color/black_bg" >
+
+		<RelativeLayout
+			android:id="@+id/vg_play_window"
+			android:layout_width="match_parent"
+			android:layout_height="200dp">
+
+			<SurfaceView
+				android:id="@+id/realplay_sv"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@android:color/transparent" />
+
+			<include layout="@layout/realplay_loading_layout"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"/>
+
+		</RelativeLayout>
+
+		<include layout="@layout/ez_play_control"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:layout_below="@id/vg_play_window"/>
+
+		<include layout="@layout/ez_realplay_prompt_layout" />
+
+		<RelativeLayout
+			android:id="@+id/realplay_capture_rl"
+			android:layout_width="65dp"
+			android:layout_height="45dp"
+			android:layout_alignBottom="@+id/vg_play_window"
+			android:layout_alignLeft="@+id/vg_play_window"
+			android:layout_alignStart="@+id/vg_play_window"
+			android:background="@color/white"
+			android:onClick="onClick"
+			android:padding="1dp"
+			android:visibility="gone">
+
+			<ImageView
+				android:id="@+id/realplay_capture_iv"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="fitXY" />
+
+			<ImageView
+				android:id="@+id/realplay_capture_watermark_iv"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="fitXY"
+				android:src="@drawable/video_file_watermark"
+				android:visibility="gone" />
+		</RelativeLayout>
+
+		<include layout="@layout/realplay_full_operate_layout" />
+
+		<ImageView
+			android:id="@+id/realplay_ptz_direction_iv"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerHorizontal="true"
+			android:layout_alignBottom="@+id/vg_play_window"
+			android:background="@drawable/left_twinkle"
+			android:scaleType="fitXY"
+			android:visibility="gone" />
+
+		<ImageButton
+			android:id="@+id/realplay_full_anim_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/yuntai_pressed"
+			android:visibility="gone" />
+
+		<LinearLayout
+			android:id="@+id/vg_play_info"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:padding="10dp"
+			android:orientation="vertical"
+			android:layout_alignParentRight="true">
+
+			<TextView
+				android:id="@+id/tv_stream_type"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/stream_type"
+				android:textColor="@color/green_text"
+				android:visibility="gone" />
+			<TextView
+				android:id="@+id/tv_decode_type"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/stream_type"
+				android:textColor="@color/yellow_text"
+				android:visibility="gone" />
+
+		</LinearLayout>
+
+	</RelativeLayout>
+
+	<Button
+		android:id="@+id/show_user_btn"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Show Viewer"
+		android:background="#543093"
+		android:textColor="@color/white"
+		android:layout_alignParentBottom="true"
+		android:layout_marginTop="30dp"
+		android:layout_marginBottom="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginLeft="30dp"
+		/>
+
+
+	<RelativeLayout
+		android:id="@+id/remote_video_view_container"
+		android:layout_width="match_parent"
+		android:layout_height="200dp"
+		android:visibility="gone"
+		android:layout_margin="20dp"
+		android:background="@color/remoteBackground">
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center">
+
+			<ImageView
+				android:layout_width="@dimen/remote_back_icon_size"
+				android:layout_height="@dimen/remote_back_icon_size"
+				android:layout_centerInParent="true"
+				android:src="@drawable/video_talk_sdk_video_switch_camera" />
+
+			<RelativeLayout
+				android:id="@+id/control_panel"
+				android:visibility="gone"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true"
+				android:layout_gravity="bottom">
+
+				<ImageView
+					android:id="@+id/btn_call"
+					android:layout_width="@dimen/call_button_size"
+					android:layout_height="@dimen/call_button_size"
+					android:layout_centerInParent="true"
+					android:onClick="onCallClicked"
+					android:scaleType="centerCrop"
+					android:src="@drawable/btn_endcall" />
+
+				<ImageView
+					android:id="@+id/btn_switch_camera"
+					android:layout_width="@dimen/other_button_size"
+					android:layout_height="@dimen/other_button_size"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="@dimen/control_bottom_horizontal_margin"
+					android:layout_toEndOf="@id/btn_call"
+					android:layout_toRightOf="@id/btn_call"
+					android:onClick="onSwitchCameraClicked"
+					android:scaleType="centerCrop"
+					android:src="@drawable/btn_switch_camera" />
+
+				<ImageView
+					android:id="@+id/btn_mute"
+					android:layout_width="@dimen/other_button_size"
+					android:layout_height="@dimen/other_button_size"
+					android:layout_centerVertical="true"
+					android:layout_marginRight="@dimen/control_bottom_horizontal_margin"
+					android:layout_toStartOf="@id/btn_call"
+					android:layout_toLeftOf="@id/btn_call"
+					android:onClick="onLocalAudioMuteClicked"
+					android:scaleType="centerCrop"
+					android:src="@drawable/btn_unmute" />
+			</RelativeLayout>
+
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:id="@+id/icon_padding"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/remote_back_icon_margin_bottom"
+			android:layout_alignParentBottom="true" />
+	</RelativeLayout>
+
+	<FrameLayout
+		android:id="@+id/local_video_view_container"
+		android:layout_width="match_parent"
+		android:layout_height="200dp"
+		android:visibility="gone"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginStart="@dimen/local_preview_margin_right"
+		android:layout_marginTop="@dimen/local_preview_margin_top"
+		android:layout_marginEnd="@dimen/local_preview_margin_right"
+		android:layout_marginRight="@dimen/local_preview_margin_right"
+		android:layout_marginBottom="20dp"
+		android:background="@color/localBackground"
+		>
+
+		<ImageView
+			android:layout_width="@dimen/local_back_icon_size"
+			android:layout_height="@dimen/local_back_icon_size"
+			android:layout_gravity="center"
+			android:scaleType="centerCrop"
+			android:src="@drawable/video_talk_sdk_video_switch_camera" />
+
+
+	</FrameLayout>
+
+
+	<io.agora.uikit.logger.LoggerRecyclerView
+		android:visibility="gone"
+		android:id="@+id/log_recycler_view"
+		android:layout_width="@dimen/log_container_width"
+		android:layout_height="@dimen/log_container_height"
+		android:layout_above="@+id/control_panel"
+		android:layout_marginLeft="@dimen/activity_horizontal_margin"
+		android:layout_marginRight="@dimen/activity_horizontal_margin"
+		android:layout_marginBottom="@dimen/activity_vertical_margin" />
+
+
+
+	<include layout="@layout/ezopen_realplay_operate_bar" android:visibility="gone"/>
+	<include layout="@layout/ezopen_realplay_operate_bar2" android:visibility="gone"/>
+
+</LinearLayout>

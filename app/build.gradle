@@ -1,0 +1,83 @@
+apply plugin: 'com.android.application'
+apply from: "../app-common/build_common.gradle"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "ezviz.ezopensdk"
+        minSdkVersion 16
+        //noinspection ExpiredTargetSdkVersion
+        targetSdkVersion 21
+        multiDexEnabled true
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+
+}
+
+dependencies {
+
+    /*萤石SDK核心模块，必须依赖*/
+    implementation 'com.ezviz.sdk:ezviz-sdk:' + EZVIZ_SDK_VERSION
+
+    /*视频通话模块，按需使用*/
+    implementation 'com.ezviz.sdk:videotalk:1.0.0'
+
+    /*码流获取模块，按需使用*/
+    implementation 'com.ezviz.sdk:streamctrl:1.0.0'
+
+    /*其它三方依赖*/
+    implementation project(':app-common')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+
+    implementation project(path: ':logger')
+    implementation 'io.agora.rtc:full-sdk:3.0.0'
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'me.relex:circleindicator:1.3.2'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.github.joielechong:countrycodepicker:2.4.2'
+    implementation 'com.github.Temidtech:AndroidOtpCustomViewmaster:1.0'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+//    implementation 'com.github.bumptech.glide:glide:3.6.1'
+    implementation 'com.squareup.picasso:picasso:2.3.2'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.daimajia.slider:library:1.1.5@aar'
+
+}
+
+/*repositories {
+    *//*萤石SDK私有仓库*//*
+    maven { url 'https://dl.bintray.com/open-ezviz/mobile-sdk'}
+}*/
